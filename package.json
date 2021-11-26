@@ -7,11 +7,13 @@
     "npm": "8.1.4"
   },
   "scripts": {
-    "start": "tsc && node dist/server",
-    "compile:ts": "tsc -w",
-    "server": "nodemon dist/server",
+    "start": "node dist/server",
+    "build:ts": "tsc",
+    "watch:ts": "tsc -w",
+    "postinstall": "npm run build:ts",
+    "serve": "nodemon dist/server",
     "client": "cd client && npm start",
-    "dev": "concurrently --kill-others-on-fail \"npm run compile:ts\" \"npm run server\" \"npm run client\"",
+    "dev": "concurrently --kill-others-on-fail \"npm run watch:ts\" \"npm run serve\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
